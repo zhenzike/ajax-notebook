@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+</head>
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    #angel {
+        position: absolute;
+    }
+</style>
+
+<body>
+    <img src="./tu/angel.gif" alt="" id="angel">
+    <script>
+        //不使用节流阀
+        /* 
+        $(function(){
+              //获取图片元素
+              var angel=$('#angel');
+             //监听文档的mousemove事件
+             $(document).on('mousemove',function(e){
+             //设置图片的位置
+             $(angel).css('left',e.pageX+'px').css('top',e.pageY+'px')
+              })
+          })
+          */
+
+        //使用节流阀
+        $(function () {
+            //获取图片元素
+            var angel = $('#angel');
+            //定义一个开启的节流阀
+            var flag = true;
+            //监听文档的mousemove事件
+            $(document).on('mousemove', function (e) {
+                //判断节流阀是否开启，没有则return
+                if (!flag) { return; }
+                //关闭节流阀，直到定时器执行完毕在开启
+                flag=false;
+                setTimeout(function () {
+                    //设置图片的位置
+                    $(angel).css('left', e.pageX + 'px').css('top', e.pageY + 'px');
+                    console.log(1);
+                    flag = true;
+                },100)
+            })
+        })
+    </script>
+</body>
+
+</html>
